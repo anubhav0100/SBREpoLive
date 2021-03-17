@@ -127,7 +127,7 @@ public class RequestProcess {
                                   ArrayList<DBColumn> dbcolumn,String RawWhere ,final Callback callback){
         ModelClass modelclass = new ModelClass();
         ArrayList<DBColumnResult> emptycolres = new ArrayList<>();
-        modelclass = new ModelClass(context,ApiKey,Api_Secret,appname,TableName,dbcolumn,emptycolres,RawWhere, Const.GET_TAG_GETDATA,dbtype,limit);
+        modelclass = new ModelClass(context,ApiKey,Api_Secret,appname,TableName,dbcolumn,emptycolres,RawWhere, Const.GET_TAG_GETDATA_WHERE,dbtype,limit);
         service_class.RequestData(modelclass, new service_class.Callback() {
             @Override
             public void onSuccess(ArrayList<HashMap<String, String>> Result) {
