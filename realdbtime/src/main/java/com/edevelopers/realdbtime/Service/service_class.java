@@ -80,11 +80,13 @@ public class service_class {
                                 fed.add(map);
                             }catch (Exception e){
                                 callback.onError(explrObject.getString("error"));
+                                return;
                             }
                         }
                     }
                     catch (Exception e){
                         callback.onError(e.getMessage());
+                        return;
                     }
 
                     callback.onSuccess(fed);
@@ -130,11 +132,13 @@ public class service_class {
                                 callback.onSuccess(result);
                             }catch (Exception e){
                                 callback.onError(explrObject.getString("error"));
+                                return;
                             }
                         }
                     }
                     catch (Exception e){
                         callback.onError(e.getMessage());
+                        return;
                     }
                 }
             }, new Response.ErrorListener() {
