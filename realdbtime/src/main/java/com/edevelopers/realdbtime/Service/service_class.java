@@ -52,6 +52,7 @@ public class service_class {
             jsonObject.accumulate(Const.appname, Modeldata.getAppname());
             jsonObject.accumulate(Const.api_secret, Modeldata.getApi_secret());
             jsonObject.accumulate(Const.query, Modeldata.getQuery());
+            jsonObject.accumulate(Const.cocd, Const.COCD);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -115,6 +116,7 @@ public class service_class {
             jsonObject.accumulate(Const.appname, Modeldata.getAppname());
             jsonObject.accumulate(Const.api_secret, Modeldata.getApi_secret());
             jsonObject.accumulate(Const.query, Modeldata.getQuery());
+            jsonObject.accumulate(Const.cocd, Const.COCD);
         } catch (JSONException e) {
             e.printStackTrace();
         }

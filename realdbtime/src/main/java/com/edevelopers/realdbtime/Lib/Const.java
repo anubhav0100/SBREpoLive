@@ -12,6 +12,7 @@ import java.util.Date;
 public class Const {
 
     public static String API_URL = "";
+    public static String COCD = "";
 
     public static final int GET_TAG_INSERT = 1;
     public static final int GET_TAG_UPDATE = 2;
@@ -29,6 +30,7 @@ public class Const {
     public static final String g_username = "g_username";
     public static final String g_password = "g_password";
     public static final String query = "query";
+    public static final String cocd = "cocd";
 
     public static final String BRACK_START = " ( ";
     public static final String BRACK_end = " ) ";
