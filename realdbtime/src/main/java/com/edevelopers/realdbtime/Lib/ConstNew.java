@@ -145,26 +145,6 @@ public class ConstNew {
         return result;
     }
 
-    public static String getMSSQLQuery_full_RawLimit(String limit, String TableName, ArrayList<DBColumn> DBcol,String DBcolres){
-
-        String result = "SELECT '[' + STUFF(( SELECT TOP ("+limit+") ',{";
-        String res = "";
-        int arrsize = DBcol.size();
-        arrsize = arrsize-1;
-        for(int i = 0; i < DBcol.size(); i++){
-            if(arrsize == i){
-                res += "\""+DBcol.get(i).getColumnname()+"\":\"' + CAST(["+DBcol.get(i).getColumnname()+"] AS NVARCHAR(MAX)) + '\"";
-            }
-            else{
-                res += "\""+DBcol.get(i).getColumnname()+"\":\"' + CAST(["+DBcol.get(i).getColumnname()+"] AS NVARCHAR(MAX)) + '\",' + '";
-            }
-        }
-
-        result += res;
-        result += "}' FROM ["+TableName+"] "+ DBcolres +" FOR XML PATH(''), TYPE  ).value('.', 'varchar(max)'),1,1,'' ) + ']' as best_result;";
-        return result;
-    }
-
     //AliyasingQuerybuilderssetup --------------------------------------------------------------->
 
     public static ArrayList<DBColRAWReturn> getMSSQLQuery_whereRawAliyasing(String TableName, ArrayList<DBColumnDoub> DBcol, String DBcolres){
@@ -176,10 +156,10 @@ public class ConstNew {
         arrsize = arrsize-1;
         for(int i = 0; i < DBcol.size(); i++){
             if(arrsize == i){
-                res += "\""+DBcol.get(i).getColumnname()+"\":\"' + CAST(["+DBcol.get(i).getColumnfunalias()+"] AS NVARCHAR(MAX)) + '\"";
+                res += "\""+DBcol.get(i).getColumnname()+"\":\"' + CAST("+DBcol.get(i).getColumnfunalias()+" AS NVARCHAR(MAX)) + '\"";
             }
             else{
-                res += "\""+DBcol.get(i).getColumnname()+"\":\"' + CAST(["+DBcol.get(i).getColumnfunalias()+"] AS NVARCHAR(MAX)) + '\",' + '";
+                res += "\""+DBcol.get(i).getColumnname()+"\":\"' + CAST("+DBcol.get(i).getColumnfunalias()+" AS NVARCHAR(MAX)) + '\",' + '";
             }
             dbs.add(new DBColumn(DBcol.get(i).getColumnname()));
         }
@@ -203,10 +183,10 @@ public class ConstNew {
         arrsize = arrsize-1;
         for(int i = 0; i < DBcol.size(); i++){
             if(arrsize == i){
-                res += "\""+DBcol.get(i).getColumnname()+"\":\"' + CAST(["+DBcol.get(i).getColumnfunalias()+"] AS NVARCHAR(MAX)) + '\"";
+                res += "\""+DBcol.get(i).getColumnname()+"\":\"' + CAST("+DBcol.get(i).getColumnfunalias()+" AS NVARCHAR(MAX)) + '\"";
             }
             else{
-                res += "\""+DBcol.get(i).getColumnname()+"\":\"' + CAST(["+DBcol.get(i).getColumnfunalias()+"] AS NVARCHAR(MAX)) + '\",' + '";
+                res += "\""+DBcol.get(i).getColumnname()+"\":\"' + CAST("+DBcol.get(i).getColumnfunalias()+" AS NVARCHAR(MAX)) + '\",' + '";
             }
             dbs.add(new DBColumn(DBcol.get(i).getColumnname()));
         }
