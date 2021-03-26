@@ -17,6 +17,7 @@ public class ModelClass {
     String TableName = "";
     String password = "";
     ArrayList<DBColumn> dbcolumn = new ArrayList<>();
+    ArrayList<DBColumnDoub> dbcolumndoub = new ArrayList<>();
 
     public ModelClass(){
 
@@ -42,14 +43,6 @@ public class ModelClass {
                     this.query = ConstNew.getMSSQLQuery(TableName,dbcolumn);
                 }
             }
-            else {
-                if(limit > 0){
-                    this.query = Const.thirdlevelbuilderLimit(String.valueOf(limit),TableName,dbcolumn);
-                }
-                else {
-                    this.query = Const.thirdlevelbuilder(TableName,dbcolumn);
-                }
-            }
         }
         if(Const.GET_TAG_UPDATE == type){
             this.query = Const.updateQueryBuilder(TableName,DBcolres,DBcolwhere);
@@ -61,14 +54,6 @@ public class ModelClass {
                 }
                 else {
                     this.query = ConstNew.getMSSQLQuery_where(TableName,dbcolumn,DBcolwhere);
-                }
-            }
-            else {
-                if(limit > 0){
-                    this.query = Const.thirdlevelbuilder_whereLimit(String.valueOf(limit),TableName,dbcolumn,DBcolwhere);
-                }
-                else {
-                    this.query = Const.thirdlevelbuilder_where(TableName,dbcolumn,DBcolwhere);
                 }
             }
         }
@@ -91,39 +76,33 @@ public class ModelClass {
                     this.query = ConstNew.getMSSQLQuery_whereRaw(TableName,dbcolumn,DBcolwhere);
                 }
             }
-            else {
+        }
+    }
+
+    public ModelClass(Context context, String api_key, String apisecret, String appname, String TableName,
+                      ArrayList<DBColumnDoub> dbcolumndoub,String DBcolwhere,int type,int db,int limit){
+        this.context = context;
+        this.api_key = api_key;
+        this.api_secret = apisecret;
+        this.appname = appname;
+        this.TableName = TableName;
+        this.dbcolumndoub = dbcolumndoub;
+        if(Const.GET_TAG_GETDATA_WHERE == type){
+            if(db == Const.MSSQL){
                 if(limit > 0){
-                    this.query = Const.thirdlevelbuilder_whereRawLimit(String.valueOf(limit),TableName,dbcolumn,DBcolwhere);
+                    ArrayList<DBColRAWReturn> getcols = ConstNew.getMSSQLQuery_where_RawAliyasingLimit(String.valueOf(limit),TableName,dbcolumndoub,DBcolwhere);
+                    this.query = getcols.get(0).getQuery();
+                    this.dbcolumn = getcols.get(0).getDbcols();
                 }
                 else {
-                    this.query = Const.thirdlevelbuilder_whereRaw(TableName,dbcolumn,DBcolwhere);
+                    ArrayList<DBColRAWReturn> getcols = ConstNew.getMSSQLQuery_whereRawAliyasing(TableName,dbcolumndoub,DBcolwhere);
+                    this.query = getcols.get(0).getQuery();
+                    this.dbcolumn = getcols.get(0).getDbcols();
                 }
             }
         }
     }
 
-    public ModelClass(Context context, String api_key, String apisecret, String Password,
-                      ArrayList<DBColumn> dbcolumn,ArrayList<DBColumnResult> DBcolres,ArrayList<DBColumnResult> DBcolwhere,int type){
-        this.context = context;
-        this.api_key = api_key;
-        this.api_secret = apisecret;
-        this.appname = "appname";
-        this.TableName = "users";
-        this.password = Password;
-        this.dbcolumn = dbcolumn;
-        if(Const.GET_TAG_INSERT == type){
-            this.query = Const.insertQueryBuilder(TableName,DBcolres);
-        }
-        else if(Const.GET_TAG_GETDATA == type){
-            this.query = Const.thirdlevelbuilder(TableName,dbcolumn);
-        }
-        if(Const.GET_TAG_UPDATE == type){
-            this.query = Const.updateQueryBuilder(TableName,DBcolres,DBcolwhere);
-        }
-        else if(Const.GET_TAG_GETDATA_WHERE == type){
-            this.query = Const.thirdlevelbuilder_where(TableName,dbcolumn,DBcolwhere);
-        }
-    }
 
     public String getPassword() {
         return password;
